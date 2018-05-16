@@ -6,16 +6,20 @@ defmodule Sequence.Application do
   use Application
 
   def start(_type, _args) do
+
+    {:ok, _pid} = Sequence.Supervisor.start_link(123)
+    #import Supervisor.Spec, warn: false
+
     # List all child processes to be supervised
-    children = [
-      {Sequence.Server, [123]}
+    #children = [
+    #  worker(Sequence.Server, [123])
       # Starts a worker by calling: Sequence.Worker.start_link(arg)
       # {Sequence.Worker, arg},
-    ]
+    #]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Sequence.Supervisor]
-    Supervisor.start_link(children, opts)
+    #opts = [strategy: :one_for_one, name: Sequence.Supervisor]
+    #Supervisor.start_link(children, opts)
   end
 end
